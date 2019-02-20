@@ -1,28 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, Component } from 'react';
+    import './App.css';
+import Person from "./Person/Person";
 
-class App extends Component {
-  render() {
+const app = props => {
+
+  const [personState, setPersonsState] = useState({
+        persons : [ {"name" : "Max"}, {"name" : "Allen"}, {"name" : "Chris"} ]
+    });
+
+
+    const switchHandler = () => {
+        setPersonsState({ persons : [ {"name" : "Maxmillian"}, {"name" : "Allen"}, {"name" : "Chris"} ] });
+    }
+
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <h1> Hi i'm a react app</h1>
+          <button onClick={switchHandler}>Switch Name</button>
+            <Person name={personState.persons[0].name}/>
       </div>
     );
-  }
 }
 
-export default App;
+export default app;
+
+
+// state = {
+//     persons : [ {"name" : "Max"}, {"name" : "Allen"}, {"name" : "Chris"} ]
+// }
+//
+// currentPerson = this.state.persons[0];
+// switchNameHandler = () => {
+//     console.log("clicked!");
+//     this.setState({ persons : [ {"name" : "Maxmillian"}, {"name" : "Allen"}, {"name" : "Chris"} ] });
+// }
