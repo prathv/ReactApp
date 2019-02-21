@@ -1,18 +1,21 @@
-import React, { useState, Component } from 'react';
+import React, {  Component } from 'react';
     import './App.css';
-import Person from "./Person/Person";
 import UserOutput from "./User/UserOutput";
 import UserInput from "./User/UserInput";
-
+import Person from './Person/Person';
 
 class App extends Component {
 
     state = {
-        persons : [ {"name" : "Max"}, {"name" : "Allen"}, {"name" : "Chris"} ]
+        persons : [ {"name" : "Max"}, {"name" : "Allen"}, {"name" : "Chris"} ],
+        stateShow : true
     }
 
-    switchNameHandler = (name) => {
-        this.setState({ persons : [ {"name" : name}, {"name" : "Allen"}, {"name" : "Chris"} ] });
+
+    changeStateShow = () => {
+        const showState = !this.state.stateShow;
+        console.log(showState);
+        this.setState({stateShow:showState});
     }
 
     nameHandler = (event) => {
@@ -22,8 +25,13 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <UserInput change={this.nameHandler} name={this.state.persons[0].name}/>
-                <UserOutput name={this.state.persons[0].name}/>
+                <button onClick={this.changeStateShow}> Toggle Display Persons</button>
+                {
+                    this.state.stateShow === true ?
+                        <div>
+                    <Person />
+                        </div>:null
+                }
             </div>
         );
     }
