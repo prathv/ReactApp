@@ -22,23 +22,31 @@ class App extends Component {
         this.setState({ persons : [ {"name" : event.target.value}, {"name" : "Allen"}, {"name" : "Chris"} ] });
     }
 
+    deletePersonHandler = (index) => {
+        const persons = this.state.persons;
+        persons.splice(index,1);
+        this.setState({persons : persons});
+    };
 
 
     render() {
         let person = null;
 
         if(this.state.stateShow){
-            person = (<Person/>);
+            person = (
+               <div>
+                   {
+                    this.state.persons.map((person, index) => {
+                    return <Person name={person.name} click={this.deletePersonHandler.bind(this,index)}/>
+                    })
+                   }
+               </div>
+            );
         }
         return (
             <div className="App">
                 <button onClick={this.changeStateShow}> Toggle Display Persons</button>
-                {
-                        <div>
-                            {person}
-                        </div>
-
-                }
+                    {person}
             </div>
         );
     }
