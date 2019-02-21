@@ -22,15 +22,22 @@ class App extends Component {
         this.setState({ persons : [ {"name" : event.target.value}, {"name" : "Allen"}, {"name" : "Chris"} ] });
     }
 
+
+
     render() {
+        let person = null;
+
+        if(this.state.stateShow){
+            person = (<Person/>);
+        }
         return (
             <div className="App">
                 <button onClick={this.changeStateShow}> Toggle Display Persons</button>
                 {
-                    this.state.stateShow === true ?
                         <div>
-                    <Person />
-                        </div>:null
+                            {person}
+                        </div>
+
                 }
             </div>
         );
