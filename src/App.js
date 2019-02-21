@@ -82,7 +82,6 @@ class App extends Component {
                     <Validation length={this.state.userinput.length}/>
                 </div>
 
-                {charList}
             </div>
         );
     }
