@@ -1,9 +1,9 @@
 import React, {  Component } from 'react';
-    import './App.css';
-import UserOutput from "./User/UserOutput";
-import UserInput from "./User/UserInput";
+import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
+
 class App extends Component {
 
     state = {
@@ -16,14 +16,12 @@ class App extends Component {
 
     changeStateShow = () => {
         const showState = !this.state.stateShow;
-        console.log(showState);
         this.setState({stateShow:showState});
     }
 
     nameHandler = (event,id) => {
         const found_person = this.state.persons.findIndex(person => person.id === id);
 
-        console.log("found person is ",found_person," and id is ",id);
         const person = {
              ...this.state.persons[found_person]
          };
@@ -33,7 +31,6 @@ class App extends Component {
         const persons = [ ...this.state.persons];
 
         persons[found_person] = person;
-        console.log(persons);
         this.setState(
             { persons:persons }
             );
@@ -54,13 +51,25 @@ class App extends Component {
         let person = null;
         let length = 0;
 
+        let classes = [];
+
+        if(this.state.persons.length <= 2)
+            classes.push('red');
+        if(this.state.persons.length <= 1)
+            classes.push('bold');
+
+
         const style =  {
             backgroundColor: 'red',
             color:"white",
             font:"inherit",
             border:"1px solid blue",
             padding:"8px",
-            cursor:"pointer"
+            cursor:"pointer",
+            ":hover": {
+                backgroundColor: "white",
+                color:"black"
+            }
         }
 
         if(this.state.stateShow){
@@ -81,9 +90,15 @@ class App extends Component {
                </div>
             );
             style.backgroundColor = 'green';
+            style[":hover"] = {
+                    backgroundColor: "lightgreen",
+                    color:"black"
+            }
         }
         return (
             <div className="App">
+                <h1> Hi this is a React App </h1>
+                <h2 className={classes.join(" ")}> This is really working </h2>
                 <button style={style} onClick={this.changeStateShow}> Toggle Display Persons</button>
                     {person}
 
@@ -98,6 +113,6 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Radium(App);
 
 
