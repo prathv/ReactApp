@@ -3,12 +3,14 @@ import React, {  Component } from 'react';
 import UserOutput from "./User/UserOutput";
 import UserInput from "./User/UserInput";
 import Person from './Person/Person';
-
+import Validation from './Validation/Validation';
 class App extends Component {
 
     state = {
         persons : [ {id: 0, name : "Max"}, {id:1 , name : "Allen"}, {id :2, name : "Chris"} ],
-        stateShow : true
+        stateShow : true,
+        userinput : ""
+
     }
 
 
@@ -43,11 +45,17 @@ class App extends Component {
         this.setState({persons : persons});
     };
 
+    inputTracker = (event) => {
+        const newInput = event.target.value;
+        this.setState({userinput:newInput});
+    };
 
     render() {
         let person = null;
+        let length = 0;
 
         if(this.state.stateShow){
+
             person = (
                <div>
                    {
@@ -67,6 +75,14 @@ class App extends Component {
             <div className="App">
                 <button onClick={this.changeStateShow}> Toggle Display Persons</button>
                     {person}
+
+                <div>
+                    <input type="text" onChange={(event) => this.inputTracker(event)} value={this.state.userinput}/>
+                    <p>{this.state.userinput}</p>
+                    <Validation length={this.state.userinput.length}/>
+                </div>
+
+                {charList}
             </div>
         );
     }
