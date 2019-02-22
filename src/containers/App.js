@@ -7,11 +7,14 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
-    state = {
-        persons : [ {id: 0, name : "Max"}, {id:1 , name : "Allen"}, {id :2, name : "Chris"} ],
-        stateShow : false,
-        userinput : ""
+    constructor(props){
+        super(props);
+        this.state = {
+            persons : [ {id: 0, name : "Max"}, {id:1 , name : "Allen"}, {id :2, name : "Chris"} ],
+            stateShow : false,
+            userinput : ""
 
+        }
     }
 
     changeStateShow = () => {
@@ -47,7 +50,12 @@ class App extends Component {
         this.setState({userinput:newInput});
     };
 
+    componentDidMount = () => {
+        console.log("[Component did mount]");
+    }       ;
+
     render() {
+        console.log("[render parent]");
         let persons = null;
         let classes = [];
         let cockpit = null;
