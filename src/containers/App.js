@@ -1,8 +1,9 @@
 import React, {  Component } from 'react';
 import cssClasses from './App.module.css';
 import Radium , { StyleRoot } from 'radium';
-import Person from '../components/Person/Person';
+import Persons from '../components/Persons/Persons';
 import Validation from '../Validation/Validation';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -35,7 +36,7 @@ class App extends Component {
             );
     }
 
-    deletePersonHandler = (index) => {
+    deletePersonHandler = (event,index) => {
         const persons = [...this.state.persons];
         persons.splice(index,1);
         this.setState({persons : persons});
@@ -47,13 +48,10 @@ class App extends Component {
     };
 
     render() {
-        let person = null;
+        let persons = null;
         let classes = [];
-
-        if(this.state.persons.length <= 2)
-            classes.push(cssClasses.red);
-        if(this.state.persons.length <= 1)
-            classes.push(cssClasses.bold);
+        let cockpit = null;
+        let btnClass = '';
 
 
         const style =  {
@@ -69,40 +67,28 @@ class App extends Component {
             }
         }
 
-        let btnClass = '';
+        cockpit = (<Cockpit btnClass={btnClass} persons={this.state.persons}  changeState={this.changeStateShow} showPersons={this.state.stateShow}/>);
 
         if(this.state.stateShow){
 
-            person = (
-               <div>
-                   {
-                    this.state.persons.map((person, index) => {
-                    return <Person
-                            name={person.name}
-                            click={this.deletePersonHandler.bind(this,index)}
-                            change={(event) => this.nameHandler(event,index)}
-                            key={person.id}
-                        />
-                    })
-                   }
+            persons = (<Persons
+                persons = {this.state.persons}
+                deletePersonHandler = {this.deletePersonHandler}
+                nameChangeHandler={this.nameHandler}
+            />);
 
-               </div>
-            );
             style.backgroundColor = 'green';
             style[":hover"] = {
-                    backgroundColor: "lightgreen",
-                    color:"black"
+                backgroundColor: "lightgreen",
+                color: "black"
+
             }
-            btnClass = cssClasses.Red;
         }
         return (
             <StyleRoot>
             <div className={cssClasses.App}>
-                <h1> Hi this is a React App </h1>
-                <h2 className={classes.join(' ')}> This is really working </h2>
-                <button className={btnClass} onClick={this.changeStateShow}> Toggle Display Persons</button>
-                    {person}
-
+                {cockpit}
+                {persons}
                 <div>
                     <input type="text" onChange={(event) => this.inputTracker(event)} value={this.state.userinput}/>
                     <p>{this.state.userinput}</p>
