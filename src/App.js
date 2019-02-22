@@ -1,6 +1,6 @@
 import React, {  Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium , { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
 
@@ -96,6 +96,7 @@ class App extends Component {
             }
         }
         return (
+            <StyleRoot>
             <div className="App">
                 <h1> Hi this is a React App </h1>
                 <h2 className={classes.join(" ")}> This is really working </h2>
@@ -107,8 +108,8 @@ class App extends Component {
                     <p>{this.state.userinput}</p>
                     <Validation length={this.state.userinput.length}/>
                 </div>
-
             </div>
+            </StyleRoot>
         );
     }
 }
