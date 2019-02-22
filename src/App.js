@@ -1,5 +1,5 @@
 import React, {  Component } from 'react';
-import './App.css';
+import cssClasses from './App.module.css';
 import Radium , { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import Validation from './Validation/Validation';
@@ -8,11 +8,10 @@ class App extends Component {
 
     state = {
         persons : [ {id: 0, name : "Max"}, {id:1 , name : "Allen"}, {id :2, name : "Chris"} ],
-        stateShow : true,
+        stateShow : false,
         userinput : ""
 
     }
-
 
     changeStateShow = () => {
         const showState = !this.state.stateShow;
@@ -49,14 +48,12 @@ class App extends Component {
 
     render() {
         let person = null;
-        let length = 0;
-
         let classes = [];
 
         if(this.state.persons.length <= 2)
-            classes.push('red');
+            classes.push(cssClasses.red);
         if(this.state.persons.length <= 1)
-            classes.push('bold');
+            classes.push(cssClasses.bold);
 
 
         const style =  {
@@ -71,6 +68,8 @@ class App extends Component {
                 color:"black"
             }
         }
+
+        let btnClass = '';
 
         if(this.state.stateShow){
 
@@ -94,13 +93,14 @@ class App extends Component {
                     backgroundColor: "lightgreen",
                     color:"black"
             }
+            btnClass = cssClasses.Red;
         }
         return (
             <StyleRoot>
-            <div className="App">
+            <div className={cssClasses.App}>
                 <h1> Hi this is a React App </h1>
-                <h2 className={classes.join(" ")}> This is really working </h2>
-                <button style={style} onClick={this.changeStateShow}> Toggle Display Persons</button>
+                <h2 className={classes.join(' ')}> This is really working </h2>
+                <button className={btnClass} onClick={this.changeStateShow}> Toggle Display Persons</button>
                     {person}
 
                 <div>
