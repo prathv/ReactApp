@@ -1,5 +1,5 @@
 import  React from 'react';
-import "../Person/Person.css"
+import "../components/Person/Person.css"
 
 const userinput = (props) => {
     return(

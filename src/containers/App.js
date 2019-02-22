@@ -1,8 +1,8 @@
 import React, {  Component } from 'react';
 import cssClasses from './App.module.css';
 import Radium , { StyleRoot } from 'radium';
-import Person from './Person/Person';
-import Validation from './Validation/Validation';
+import Person from '../components/Person/Person';
+import Validation from '../Validation/Validation';
 
 class App extends Component {
 
